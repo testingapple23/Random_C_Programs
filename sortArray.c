@@ -18,25 +18,14 @@ int binarySeach(int arraySize, int* theArray, int key){
 	{
 		return 0; 
 	}
-	if (arraySize== 2)
-	{
-		if (theArray[0]== key)
-		{
-			return 0;
-		}
-		if (theArray[1] == key)
-		{
-			/* code */
-			return 1; 
-		}
-	}
+
 	else{
 
 		int lower = 0;
 		int max = arraySize-1;
-		int middle = arraySize/2;
+		int middle = (lower+max)/2;
 	
-		while(middle!= lower || middle!= max){
+		while(lower<=max){
 		if (theArray[middle] == key)
 		{
 
@@ -87,7 +76,7 @@ int main(int argc, char *argv[]){
 	printArray(arraySIZE,ca);
 	
 printf("\n");
-	int x = binarySeach(arraySIZE , a , 4);
+	int x = binarySeach(arraySIZE , a , 5);
 	printf("%d\n", x);
 return 0;
 
