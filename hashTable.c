@@ -9,7 +9,7 @@ typedef struct node{
 #define SIZE 10
 
 int hashFunc(int data ){
-	return data% SIZE;
+	return data % SIZE;
 }
 
 int search(int lookingFOR, Node* head){  
@@ -28,19 +28,48 @@ int search(int lookingFOR, Node* head){
 }
 
 
-void insertNODE(int data, Node* theArray){
-	int key = hashFunc(data);
-	if (theArray[key]  NULL)
-	{
-		
+Node* createNODE(int data){
+	
+	Node *b = (Node*) malloc(sizeof(Node));
+		b->next = NULL;
+		b->data = data; 
+		return b;
 	}
-}
-int main(int argc, char *argv[])
+ 
+int main(int argc, char *argv[]) //a pointer to the first element of the array, which is a pointer to a char
 {
-	Node (*theArray)[SIZE];
-	for (int i = 0; i < SIZE; ++i)
+	Node* table[SIZE] = {NULL};
+
+	FILE *fp = fopen("text.txt", "r");
+	if(fp==NULL)
 	{
-		theArray[i]=NULL;
+		printf("error");
+		return 0;
 	}
-	return 0;
+	 int number, duplicateCheck;
+	 char letter; 
+	 while(!feof(fp)){
+	 	
+		fscanf(fp, "%c %d\n", &letter, &number);
+		// printf("%c\n",letter);
+		if(letter == 'i'){
+			Node* valueInserting = createNODE(number);
+			int hashSpot = hashFunc(valueInserting->data); // inserting the value based on the data given (data%SIZE)
+			duplicateCheck = search(number, table[hashSpot]); // check if the inputting value has already been put in 
+
+			if (table[hashSpot] == NULL)
+			{
+				table[hashSpot] = valueInserting;	
+			}
+			else{
+				valueInserting->next = table [ hashSpot];
+				table[hashSpot] = valueInserting;
+			}
+		}
+	
+}
+	printf("%d\n", table[2]->next->data);
+return 0;
+
+
 }
